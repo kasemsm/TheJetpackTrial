@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.presentation.ui
 
 import android.os.Bundle
@@ -6,12 +21,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -29,7 +57,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavType
-import androidx.navigation.compose.*
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.model.MyCats
 import com.example.androiddevchallenge.ui.theme.MyTheme
@@ -59,18 +91,23 @@ fun LazyCatColumn(
     navController: NavController
 ) {
     Row {
-        LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
-            itemsIndexed(
-                items = listItems
-            ) { _, item ->
-                CatCard(cats = item, onClick = {
-                    navController.navigate("detail_screen/${item.catName}/${item.catBreedDetails}/${item.catImage}")
-                })
+        LazyVerticalGrid(
+            cells = GridCells.Fixed(2),
+            content = {
+                itemsIndexed(
+                    items = listItems
+                ) { _, item ->
+                    CatCard(
+                        cats = item,
+                        onClick = {
+                            navController.navigate("detail_screen/${item.catName}/${item.catBreedDetails}/${item.catImage}")
+                        }
+                    )
+                }
             }
-        })
+        )
     }
 }
-
 
 @ExperimentalCoroutinesApi
 @Composable
@@ -141,7 +178,7 @@ fun CatCard(
 @Composable
 fun MainContent(navController: NavController) {
     val cats = mutableListOf<MyCats>()
-    //1
+    // 1
     cats.add(
         MyCats(
             "https://www.nylabone.com/-/media/Images/Nylabone-NA/US/Dog101/Activities-Fun/10-great-small-dog-breeds/maltese-portrait.jpg?la=en&hash=D9E453DCD438E1631C1D994426DAC62B064011BF",
@@ -153,7 +190,7 @@ fun MainContent(navController: NavController) {
         )
     )
 
-    //2
+    // 2
     cats.add(
         MyCats(
             "https://www.nylabone.com/-/media/Images/Nylabone-NA/US/Dog101/Activities-Fun/10-great-small-dog-breeds/dachshund-portrait.jpg?la=en&hash=CE8DD83BA8E34640681926C0F6314E4AB881C460",
@@ -165,7 +202,7 @@ fun MainContent(navController: NavController) {
         )
     )
 
-    //3
+    // 3
     cats.add(
         MyCats(
             "https://www.nylabone.com/-/media/Images/Nylabone-NA/US/Dog101/Activities-Fun/10-great-small-dog-breeds/shih-tzu-portrait.jpg?la=en&hash=939ACC46D89D572D6342E831FC00EB4042CC2F9E",
@@ -177,7 +214,7 @@ fun MainContent(navController: NavController) {
         )
     )
 
-    //4
+    // 4
     cats.add(
         MyCats(
             "https://www.nylabone.com/-/media/Images/Nylabone-NA/US/Dog101/Activities-Fun/10-great-small-dog-breeds/pug-portrait.jpg?la=en&hash=D1BFE3128FFB000702F3B5191E6BB63F29D07A25",
@@ -189,8 +226,7 @@ fun MainContent(navController: NavController) {
         )
     )
 
-
-    //5
+    // 5
     cats.add(
         MyCats(
             "https://www.nylabone.com/-/media/Images/Nylabone-NA/US/Dog101/Activities-Fun/10-great-small-dog-breeds/pomeranian-portrait.jpg?la=en&hash=7BE61068D85920B9DB49491F4D80EDEACACD08A5",
@@ -202,7 +238,7 @@ fun MainContent(navController: NavController) {
         )
     )
 
-    //6
+    // 6
     cats.add(
         MyCats(
             "https://www.nylabone.com/-/media/Images/Nylabone-NA/US/Dog101/Activities-Fun/10-great-small-dog-breeds/bichon-frise-portrait.jpg?la=en&hash=C749B302E87C26863BF206CDE7EBB5A5A93B73BD",
@@ -214,7 +250,7 @@ fun MainContent(navController: NavController) {
         )
     )
 
-    //7
+    // 7
     cats.add(
         MyCats(
             "https://www.nylabone.com/-/media/Images/Nylabone-NA/US/Dog101/Activities-Fun/10-great-small-dog-breeds/toy-poodle-portrait.jpg?la=en&hash=D8DE931E48B40962EBC085D5A5120D71BD9E938F",
@@ -226,7 +262,7 @@ fun MainContent(navController: NavController) {
         )
     )
 
-    //8
+    // 8
     cats.add(
         MyCats(
             "https://www.nylabone.com/-/media/Images/Nylabone-NA/US/Dog101/Activities-Fun/10-great-small-dog-breeds/chihuahua-portrait.jpg?la=en&hash=39B5D61E9664FF3768EB3B82941DAD5B9D446935",
@@ -237,7 +273,6 @@ fun MainContent(navController: NavController) {
             "The Chihuahua is known for its tiny size but large personality—not to mention pointy ears and cute round eyes. Chihuahuas are extremely loyal, and their pet parents are, too! In fact, people who have a Chihuahua often have more than one in their lifetime."
         )
     )
-
 
     Column(
         modifier = Modifier.padding(3.dp),
@@ -265,14 +300,12 @@ fun ComposeNavigation() {
         composable(
             "detail_screen/{catName}/{catInfo}/{catUrl}",
             arguments = listOf(
-                navArgument("catName")
-                { type = NavType.StringType },
+                navArgument("catName") { type = NavType.StringType },
 
-                navArgument("catInfo")
-                { type = NavType.StringType },
+                navArgument("catInfo") { type = NavType.StringType },
 
-                navArgument("catUrl")
-                { type = NavType.StringType }),
+                navArgument("catUrl") { type = NavType.StringType }
+            ),
 
             ) {
             DetailScreen(
@@ -310,11 +343,12 @@ fun ListScreen(navController: NavController) {
                 },
                 backgroundColor = colorResource(id = R.color.purple_700)
             )
-        }, content = {
+        },
+        content = {
             MainContent(navController = navController)
-        })
+        }
+    )
 }
-
 
 @ExperimentalCoroutinesApi
 @Composable
@@ -348,7 +382,8 @@ fun DetailScreen(
                 backgroundColor = colorResource(id = R.color.purple_700),
                 contentColor = Color.White
             )
-        }, content = {
+        },
+        content = {
             Column {
                 Card(
                     shape = CutCornerShape(bottomEnd = 15.dp, bottomStart = 15.dp),
@@ -389,7 +424,7 @@ fun DetailScreen(
                     elevation = 1.5.dp,
                 ) {
                     Column(Modifier.padding(15.dp)) {
-                        //Energy Level
+                        // Energy Level
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_energy),
@@ -411,7 +446,7 @@ fun DetailScreen(
                             progress = nextFloat()
                         )
 
-                        //Playfulness
+                        // Playfulness
                         Spacer(modifier = Modifier.padding(top = 14.dp))
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
@@ -434,7 +469,7 @@ fun DetailScreen(
                             progress = nextFloat()
                         )
 
-                        //Affection Level
+                        // Affection Level
                         Spacer(modifier = Modifier.padding(top = 14.dp))
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
@@ -475,7 +510,6 @@ fun DetailScreen(
                         .fillMaxWidth()
                         .padding(start = 20.dp, end = 20.dp),
                     onClick = {
-
                     },
                     shape = CutCornerShape(5.dp)
                 ) {
@@ -487,5 +521,6 @@ fun DetailScreen(
                     Text(text = "Adopt this Cute Puppy?")
                 }
             }
-        })
+        }
+    )
 }
