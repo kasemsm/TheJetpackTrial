@@ -10,9 +10,7 @@ Perfect app for adopters who are looking for an app with minimal UI.
 
 
 ## :bulb: Motivation and Context
-<!--- Optionally point readers to interesting parts of your submission. -->
-<!--- What are you especially proud of? -->
-
+Jetpack Compose is Just Amazing & I enjoyed each & every second of using it.
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->
