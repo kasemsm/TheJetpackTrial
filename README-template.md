@@ -1,12 +1,12 @@
-# Put title of your app here
+# My Puppy
 
 <!--- Replace <OWNER> with your Github Username and <REPOSITORY> with the name of your repository. -->
 <!--- You can find both of these in the url bar when you open your repository in github. -->
-![Workflow result](https://github.com/<OWNER>/<REPOSITORY>/workflows/Check/badge.svg)
+![Workflow result](https://github.com/kasemsm/TheJetpackTrial/workflows/Check/badge.svg)
 
 
 ## :scroll: Description
-<!--- Describe your app in one or two sentences -->
+Perfect app for adopters who are looking for an app with minimal UI.
 
 
 ## :bulb: Motivation and Context
